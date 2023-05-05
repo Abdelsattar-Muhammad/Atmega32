@@ -28,22 +28,18 @@ void I2C_Start(void)
 {
 	TWCR= ( 1<<TWINT ) | ( 1<<TWEN ) | ( 1<<TWSTA ) ;
 	while(READ_BIT(TWCR,TWINT)==0);
-	
-	while ((TWSR & 0XF8) != 0x08); // start condition has been transmitted
 }
 void I2C_Write_address(u8 address)
 {
 	TWDR=address;//adress is 7 bit and 0's bit is R/Not Write bit
 	TWCR=(1<<TWINT)|(1<<TWEN);
 	while(READ_BIT(TWCR,TWINT)==0);
-	while ((TWSR & 0XF8) != 0x18); // SLA+write has been transmitted and ACK has been received
 }
 void I2C_Write_Data(u8 data)
 {
 	TWDR=data;
 	TWCR=(1<<TWINT)|(1<<TWEN);
 	while(READ_BIT(TWCR,TWINT)==0);
-	while ((TWSR & 0XF8) != 0x28); // data has been transmitted and ACK has been received
 }
 void I2C_Stop(void)
 {
@@ -56,7 +52,7 @@ void I2C_Set_address(u8 address)
 	TWAR=address;
 }
 
-u8   I2C_Read_Data(void)
+u8   I2C_Read_Data_With_ACK(void)
 {
 	TWCR=(1<<TWINT)|(1<<TWEN)|(1<<TWEA);// Enable sending ACK after reading or receiving data TWEA=1
 	while(READ_BIT(TWCR,TWINT)==0);
@@ -64,5 +60,12 @@ u8   I2C_Read_Data(void)
 	TWCR=(1<<TWINT)|(1<<TWEN)|(1<<TWEA);
 	while(READ_BIT(TWCR,TWINT)==0);
 	while ((TWSR & 0XF8) != 0x80);
+	return TWDR;
+}
+
+u8   I2C_Read_Data_With_NACK(void)
+{
+	TWCR=(1<<TWINT)|(1<<TWEN);
+	while(READ_BIT(TWCR,TWINT)==0);
 	return TWDR;
 }

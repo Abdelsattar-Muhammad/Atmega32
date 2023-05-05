@@ -18,5 +18,6 @@ void I2C_Write_Data(u8 data);
 void I2C_Stop(void);
 /* Functions for Slave */
 void I2C_Set_address(u8 address);
-u8   I2C_Read_Data(void);
+u8   I2C_Read_Data_With_ACK(void);
+u8   I2C_Read_Data_With_NACK(void);
 #endif /* I2C_H_ */
