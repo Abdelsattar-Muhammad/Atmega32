@@ -53,7 +53,7 @@ void DIO_vSetPinDirection(PORT_t Copy_PortName,PINS_t Copy_PinNumber,DIR_t Copy_
 		}//end else				
 }//end Function
 
-void DIO_vSetPortDirection(PORT_t Copy_PortName,DIR_t Copy_Direction )
+void DIO_vSetPortDirection(PORT_t Copy_PortName,u8 Copy_Direction )
 {
 		switch(Copy_PortName)
 		{
