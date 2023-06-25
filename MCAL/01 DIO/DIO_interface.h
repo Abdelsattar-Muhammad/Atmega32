@@ -50,7 +50,7 @@ void DIO_vSetPullupPin(PORT_t Copy_PortName,PINS_t Copy_PinNumber);
 
 
 
-void DIO_vSetPortDirection(PORT_t Copy_PortName,DIR_t Copy_Direction );
+void DIO_vSetPortDirection(PORT_t Copy_PortName,u8 Copy_Direction );
 
 void DIO_vSetPortValue(PORT_t Copy_PortName,u8 value);
 
